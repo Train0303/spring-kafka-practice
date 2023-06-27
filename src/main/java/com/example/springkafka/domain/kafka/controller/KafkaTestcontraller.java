@@ -36,4 +36,22 @@ public class KafkaTestcontraller {
 
         return "Send failed";
     }
+
+    @GetMapping("/test/callback")
+    public void testCallback(){
+        ObjectMapper mapper = new ObjectMapper();
+        KafkaRequestDto message = KafkaRequestDto.builder()
+                .name("김태호")
+                .company("부산대학교")
+                .age(26)
+                .build();
+
+        try{
+            String jsonInString = mapper.writeValueAsString(message);
+            kafkaSampleProducerService.sendMessageAndCallback(jsonInString);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
