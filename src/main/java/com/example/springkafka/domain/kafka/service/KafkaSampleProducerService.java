@@ -22,16 +22,25 @@ public class KafkaSampleProducerService {
     }
 
     public void sendMessageAndCallback(String message) {
+
+        System.out.println("--- 프로듀서 ---");
+//        System.out.println(Thread.currentThread().getId());
+
+
         // 스프링 3.0부턴 CompletableFuture로 변경되었다.
 //        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send("test_topic", message);
         CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("test_topic", message);
+
+        // 콜백
         future.whenComplete((result, ex) -> {
             if(ex == null) {
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    throw new RuntimeException(e);
-//                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("---- 콜백 ----");
+//                System.out.println(Thread.currentThread().getId());
                 System.out.println("전송이 성공적으로 완료되었습니다.");
                 System.out.println(result);
             }else{
@@ -39,5 +48,6 @@ public class KafkaSampleProducerService {
             }
         });
 
+//        System.out.println(Thread.currentThread().getId());
     }
 }
