@@ -2,7 +2,7 @@ version: '2'
 services:
   zookeeper:
     container_name: local-zookeeper
-    image: wurstmeister/zookeeper
+    image: amd64/zookeeper
     ports:
       - "2181:2181"
 
@@ -14,7 +14,11 @@ services:
     environment:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
-      KAFKA_CREATE_TOPICS: "test_topic:1:1" #Topic명:Partition수:Replica수
+      KAFKA_CREATE_TOPICS: | #Topic명:Partition수:Replica수
+        testTopic:1:1
+        testTopicProto:1:1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
