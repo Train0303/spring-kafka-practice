@@ -21,7 +21,7 @@ public class KafkaConsumerConfig {
 	@Bean(name = "stringConsumerFactory")
 	public ConsumerFactory<String, String> stringConsumerFactory() {
 		Map<String, Object> props = new HashMap<>();
-		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "string-group");
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -39,7 +39,7 @@ public class KafkaConsumerConfig {
 	@Bean(name = "protobufConsumerFactory")
 	public ConsumerFactory<String, byte[]> protobufConsumerFactory() {
 		Map<String, Object> props = new HashMap<>();
-		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "protobuf-group");
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
