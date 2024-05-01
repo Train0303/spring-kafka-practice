@@ -6,14 +6,17 @@ import java.util.Map;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.OffsetResetStrategy;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
-import org.apache.kafka.common.serialization.ByteArraySerializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+
+import com.example.springkafka.domain.kafka.dto.protobuf.OrderKafkaDto;
+
+import io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer;
+import io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializerConfig;
 
 @Configuration
 public class KafkaConsumerConfig {
@@ -51,6 +54,27 @@ public class KafkaConsumerConfig {
 	public ConcurrentKafkaListenerContainerFactory<String, byte[]> protubufKafkaListener() {
 		ConcurrentKafkaListenerContainerFactory<String, byte[]> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(protobufConsumerFactory());
+		return factory;
+	}
+
+	@Bean(name = "schemaConsumerFactory")
+	public ConsumerFactory<String, OrderKafkaDto> schemaConsumerFactory() {
+		Map<String, Object> props = new HashMap<>();
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, "schema-group");
+		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaProtobufDeserializer.class);
+		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, OffsetResetStrategy.EARLIEST.toString());
+		props.put(KafkaProtobufDeserializerConfig.SPECIFIC_PROTOBUF_KEY_TYPE, String.class);
+		props.put(KafkaProtobufDeserializerConfig.SPECIFIC_PROTOBUF_VALUE_TYPE, OrderKafkaDto.class);
+		props.put(KafkaProtobufDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "localhost:8081");
+		return new DefaultKafkaConsumerFactory<>(props);
+	}
+
+	@Bean(name = "schemaKafkaListener")
+	public ConcurrentKafkaListenerContainerFactory<String, OrderKafkaDto> schemaKafkaListener() {
+		ConcurrentKafkaListenerContainerFactory<String, OrderKafkaDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+		factory.setConsumerFactory(schemaConsumerFactory());
 		return factory;
 	}
 }

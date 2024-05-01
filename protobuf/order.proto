@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "com.example.springkafka.domain.kafka.dto.protobuf";
+option java_outer_classname = "OrderKafkaDto";
+import 'google/protobuf/timestamp.proto';
+
+message Order {
+  int64 order_id = 1;
+  google.protobuf.Timestamp date_time = 2;
+  repeated Product product = 3;
+}
+
+message Product {
+  int32 product_id = 1;
+  string name = 2;
+  string description = 3;
+}
