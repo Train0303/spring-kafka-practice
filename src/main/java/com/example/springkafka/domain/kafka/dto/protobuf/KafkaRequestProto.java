@@ -37,16 +37,16 @@ public final class KafkaRequestProto {
     int getAge();
 
     /**
-     * <code>string company = 3;</code>
-     * @return The company.
+     * <code>string email = 3;</code>
+     * @return The email.
      */
-    java.lang.String getCompany();
+    java.lang.String getEmail();
     /**
-     * <code>string company = 3;</code>
-     * @return The bytes for company.
+     * <code>string email = 3;</code>
+     * @return The bytes for email.
      */
     com.google.protobuf.ByteString
-        getCompanyBytes();
+        getEmailBytes();
   }
   /**
    * Protobuf type {@code KafkaRequestDto}
@@ -62,7 +62,7 @@ public final class KafkaRequestProto {
     }
     private KafkaRequestDto() {
       name_ = "";
-      company_ = "";
+      email_ = "";
     }
 
     @java.lang.Override
@@ -139,38 +139,38 @@ public final class KafkaRequestProto {
       return age_;
     }
 
-    public static final int COMPANY_FIELD_NUMBER = 3;
-    private volatile java.lang.Object company_;
+    public static final int EMAIL_FIELD_NUMBER = 3;
+    private volatile java.lang.Object email_;
     /**
-     * <code>string company = 3;</code>
-     * @return The company.
+     * <code>string email = 3;</code>
+     * @return The email.
      */
     @java.lang.Override
-    public java.lang.String getCompany() {
-      java.lang.Object ref = company_;
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        company_ = s;
+        email_ = s;
         return s;
       }
     }
     /**
-     * <code>string company = 3;</code>
-     * @return The bytes for company.
+     * <code>string email = 3;</code>
+     * @return The bytes for email.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getCompanyBytes() {
-      java.lang.Object ref = company_;
+        getEmailBytes() {
+      java.lang.Object ref = email_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        company_ = b;
+        email_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -197,8 +197,8 @@ public final class KafkaRequestProto {
       if (age_ != 0) {
         output.writeInt32(2, age_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(company_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, company_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(email_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, email_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -216,8 +216,8 @@ public final class KafkaRequestProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, age_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(company_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, company_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(email_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, email_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -238,8 +238,8 @@ public final class KafkaRequestProto {
           .equals(other.getName())) return false;
       if (getAge()
           != other.getAge()) return false;
-      if (!getCompany()
-          .equals(other.getCompany())) return false;
+      if (!getEmail()
+          .equals(other.getEmail())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -255,8 +255,8 @@ public final class KafkaRequestProto {
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + AGE_FIELD_NUMBER;
       hash = (53 * hash) + getAge();
-      hash = (37 * hash) + COMPANY_FIELD_NUMBER;
-      hash = (53 * hash) + getCompany().hashCode();
+      hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+      hash = (53 * hash) + getEmail().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -389,7 +389,7 @@ public final class KafkaRequestProto {
 
         age_ = 0;
 
-        company_ = "";
+        email_ = "";
 
         return this;
       }
@@ -419,7 +419,7 @@ public final class KafkaRequestProto {
         com.example.springkafka.domain.kafka.dto.protobuf.KafkaRequestProto.KafkaRequestDto result = new com.example.springkafka.domain.kafka.dto.protobuf.KafkaRequestProto.KafkaRequestDto(this);
         result.name_ = name_;
         result.age_ = age_;
-        result.company_ = company_;
+        result.email_ = email_;
         onBuilt();
         return result;
       }
@@ -475,8 +475,8 @@ public final class KafkaRequestProto {
         if (other.getAge() != 0) {
           setAge(other.getAge());
         }
-        if (!other.getCompany().isEmpty()) {
-          company_ = other.company_;
+        if (!other.getEmail().isEmpty()) {
+          email_ = other.email_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -516,7 +516,7 @@ public final class KafkaRequestProto {
                 break;
               } // case 16
               case 26: {
-                company_ = input.readStringRequireUtf8();
+                email_ = input.readStringRequireUtf8();
 
                 break;
               } // case 26
@@ -643,78 +643,78 @@ public final class KafkaRequestProto {
         return this;
       }
 
-      private java.lang.Object company_ = "";
+      private java.lang.Object email_ = "";
       /**
-       * <code>string company = 3;</code>
-       * @return The company.
+       * <code>string email = 3;</code>
+       * @return The email.
        */
-      public java.lang.String getCompany() {
-        java.lang.Object ref = company_;
+      public java.lang.String getEmail() {
+        java.lang.Object ref = email_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          company_ = s;
+          email_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string company = 3;</code>
-       * @return The bytes for company.
+       * <code>string email = 3;</code>
+       * @return The bytes for email.
        */
       public com.google.protobuf.ByteString
-          getCompanyBytes() {
-        java.lang.Object ref = company_;
+          getEmailBytes() {
+        java.lang.Object ref = email_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          company_ = b;
+          email_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string company = 3;</code>
-       * @param value The company to set.
+       * <code>string email = 3;</code>
+       * @param value The email to set.
        * @return This builder for chaining.
        */
-      public Builder setCompany(
+      public Builder setEmail(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        company_ = value;
+        email_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string company = 3;</code>
+       * <code>string email = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCompany() {
+      public Builder clearEmail() {
         
-        company_ = getDefaultInstance().getCompany();
+        email_ = getDefaultInstance().getEmail();
         onChanged();
         return this;
       }
       /**
-       * <code>string company = 3;</code>
-       * @param value The bytes for company to set.
+       * <code>string email = 3;</code>
+       * @param value The bytes for email to set.
        * @return This builder for chaining.
        */
-      public Builder setCompanyBytes(
+      public Builder setEmailBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        company_ = value;
+        email_ = value;
         onChanged();
         return this;
       }
@@ -796,11 +796,11 @@ public final class KafkaRequestProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\027kafka_request_dto.proto\"=\n\017KafkaReques" +
-      "tDto\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005\022\017\n\007compa" +
-      "ny\030\003 \001(\tBF\n1com.example.springkafka.doma" +
-      "in.kafka.dto.protobufB\021KafkaRequestProto" +
-      "b\006proto3"
+      "\n\027kafka_request_dto.proto\";\n\017KafkaReques" +
+      "tDto\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005\022\r\n\005email" +
+      "\030\003 \001(\tBF\n1com.example.springkafka.domain" +
+      ".kafka.dto.protobufB\021KafkaRequestProtob\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -811,7 +811,7 @@ public final class KafkaRequestProto {
     internal_static_KafkaRequestDto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_KafkaRequestDto_descriptor,
-        new java.lang.String[] { "Name", "Age", "Company", });
+        new java.lang.String[] { "Name", "Age", "Email", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

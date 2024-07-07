@@ -36,4 +36,18 @@ public class KafkaSampleConsumerService {
         System.out.println("해당 메시지는 test_topic_proto에서 온 메시지입니다.");
         System.out.println(JsonFormat.printer().print(data));
     }
+
+    @KafkaListener(topics = "testTopicProtoSchema", containerFactory = "schemaKafkaListener")
+    public void consumer(KafkaRequestProto.KafkaRequestDto receiveData) {
+        try {
+            // object를 KafkaRequestDto타입으로 변환.
+            System.out.println("--- 컨슈머 ---");
+            System.out.println("컨슈머 쓰레드 ID : " + Thread.currentThread().getId());
+
+            System.out.println("해당 메시지는 test_topic_proto_schema에서 온 메시지입니다.");
+            System.out.println(JsonFormat.printer().print(receiveData));
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
+    }
 }

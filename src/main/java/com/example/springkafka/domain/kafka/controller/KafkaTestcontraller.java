@@ -47,10 +47,22 @@ public class KafkaTestcontraller {
     public void testProtoBufCallback(){
         KafkaRequestProto.KafkaRequestDto request = KafkaRequestProto.KafkaRequestDto.newBuilder()
             .setName("김태호")
-            .setCompany("부산대학교")
+            // .setCompany("부산대학교")
             .setAge(26)
             .build();
 
         kafkaSampleProducerService.sendProtoMessageAndCallback(request);
+    }
+
+    @GetMapping("/protobuf/schema/test")
+    public void testProtoBufSchema(){
+        KafkaRequestProto.KafkaRequestDto request = KafkaRequestProto.KafkaRequestDto.newBuilder()
+            .setName("김태호")
+            // .setCompany("부산대학교")
+            .setEmail("rjsdnxogh55@gmail.com")
+            .setAge(26)
+            .build();
+
+        kafkaSampleProducerService.sendProtoSchemaMessageAndCallback(request);
     }
 }

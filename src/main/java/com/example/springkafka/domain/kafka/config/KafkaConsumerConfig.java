@@ -13,6 +13,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
+import com.example.springkafka.domain.kafka.dto.protobuf.KafkaRequestProto;
 import com.example.springkafka.domain.kafka.dto.protobuf.OrderKafkaDto;
 
 import io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer;
@@ -58,22 +59,22 @@ public class KafkaConsumerConfig {
 	}
 
 	@Bean(name = "schemaConsumerFactory")
-	public ConsumerFactory<String, OrderKafkaDto> schemaConsumerFactory() {
+	public ConsumerFactory<String, KafkaRequestProto.KafkaRequestDto> schemaConsumerFactory() {
 		Map<String, Object> props = new HashMap<>();
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "schema-group");
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaProtobufDeserializer.class);
 		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, OffsetResetStrategy.EARLIEST.toString());
-		props.put(KafkaProtobufDeserializerConfig.SPECIFIC_PROTOBUF_KEY_TYPE, String.class);
-		props.put(KafkaProtobufDeserializerConfig.SPECIFIC_PROTOBUF_VALUE_TYPE, OrderKafkaDto.class);
-		props.put(KafkaProtobufDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "localhost:8081");
+		props.put(KafkaProtobufDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
+		props.put(KafkaProtobufDeserializerConfig.SPECIFIC_PROTOBUF_VALUE_TYPE,
+			KafkaRequestProto.KafkaRequestDto.class.getName());
 		return new DefaultKafkaConsumerFactory<>(props);
 	}
 
 	@Bean(name = "schemaKafkaListener")
-	public ConcurrentKafkaListenerContainerFactory<String, OrderKafkaDto> schemaKafkaListener() {
-		ConcurrentKafkaListenerContainerFactory<String, OrderKafkaDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+	public ConcurrentKafkaListenerContainerFactory<String, KafkaRequestProto.KafkaRequestDto> schemaKafkaListener() {
+		ConcurrentKafkaListenerContainerFactory<String, KafkaRequestProto.KafkaRequestDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(schemaConsumerFactory());
 		return factory;
 	}

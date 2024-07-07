@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import com.example.springkafka.domain.kafka.dto.KafkaRequestDto;
+import com.example.springkafka.domain.kafka.dto.protobuf.KafkaRequestProto;
 import com.example.springkafka.domain.kafka.dto.protobuf.OrderKafkaDto;
 
 import io.confluent.kafka.serializers.protobuf.KafkaProtobufSerializer;
@@ -38,12 +40,14 @@ public class KafkaProducerConfig {
 	}
 
 	@Bean(name = "schemaKafkaTemplate")
-	public KafkaTemplate<String, OrderKafkaDto> schemaKafkaTemplate() {
+	public KafkaTemplate<String, KafkaRequestProto.KafkaRequestDto> schemaKafkaTemplate() {
 		Map<String, Object> configProps = new HashMap<>();
 		configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
 		configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaProtobufSerializer.class);
-		configProps.put(KafkaProtobufSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "localhost:8081");
+		configProps.put(KafkaProtobufSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
+		configProps.put(KafkaProtobufSerializerConfig.VALUE_SUBJECT_NAME_STRATEGY, "io.confluent.kafka.serializers.subject.TopicNameStrategy");
+
 		return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(configProps));
 	}
 }
